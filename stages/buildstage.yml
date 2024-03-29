@@ -16,11 +16,11 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout Repository
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         # Importing common steps from the other repository
         - name: Import Common Steps
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
           with:
-            repository: myorg/repo2
-            path: .github/workflows/common-steps.yml
-        # Update this path based on your repository structure
+            repository: manjeet-yadav123/Pipeline-Common
+            path: stages/steps/.net-ci-steps.yml
+
