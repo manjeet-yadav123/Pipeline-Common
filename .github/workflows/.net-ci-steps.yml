@@ -3,9 +3,9 @@ name: .NET Core CI Steps
 on:
   workflow_call:
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
