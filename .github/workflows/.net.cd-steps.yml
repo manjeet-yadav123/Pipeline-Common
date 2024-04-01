@@ -1,6 +1,3 @@
-deploy:
-  uses: manjeet-yadav123/Pipeline-Common/.github/workflows/.net.cd-steps.yml@main
-
 on:
   push:
     branches: [ "main" ]
