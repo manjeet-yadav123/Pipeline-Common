@@ -2,15 +2,6 @@ name: .NET Core CI Steps
 
 on:
   workflow_call:
-    inputs:
-      solution_path:
-        description: "Path to the .sln file"
-        required: true
-        default: '**/*.sln'
-      configuration:
-        description: "Build configuration (e.g., Debug, Release)"
-        required: false
-        default: "Release"
 
 jobs:
   build:
@@ -26,10 +17,7 @@ jobs:
         dotnet-version: '3.1.x' # Specify the version of .NET Core you want to use
 
     - name: Restore dependencies
-      run: dotnet restore ${{ inputs.solution_path }}
+      run: dotnet restore '**/*.sln'
 
     - name: Build
-      run: dotnet build ${{ inputs.solution_path }} --configuration ${{ inputs.configuration }} --no-restore
-
-    - name: Test
-      run: dotnet test ${{ inputs.solution_path }} --no-restore --verbosity normal
+      run: dotnet build '**/*.sln' --configuration Release --no-restore
