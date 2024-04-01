@@ -1,8 +1,9 @@
-on:
-  push:
-    branches: [ "main" ]
-  # Add more triggers as needed
+name: CD Steps
 
+on:
+  workflow_call:
+    inputs:
+      deployment-environment:
 jobs:
   deploy_to_dev:
     name: Deploy to Dev
