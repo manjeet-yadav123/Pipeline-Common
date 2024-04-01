@@ -1,12 +1,5 @@
-# File: .github/workflows/deploy-to-azure.yml
-name: Deploy to Azure
-
 on:
-  workflow_run:
-    workflows: ["Build-Stage"]
-    types:
-      - completed
-
+  workflow_call:
 jobs:
   deploy:
     runs-on: ubuntu-latest
