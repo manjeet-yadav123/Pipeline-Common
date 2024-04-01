@@ -1,13 +1,27 @@
-#     steps:
-#       - name: Download Artifact
-#         uses: actions/download-artifact@v2
-#         with:
-#           name: app
-#           path: app
+# File: .github/workflows/deploy-to-azure.yml
+name: Deploy to Azure
 
-#       - name: Deploy to Azure
-#         uses: azure/webapps-deploy@v2
-#         with:
-#           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-#           publish-profile: ${{ secrets.APP_SERVICE_SECRET }}
-#           package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+on:
+  workflow_run:
+    workflows: ["Build-Stage"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app
+          path: app
+
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.APP_SERVICE_SECRET }}
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+
