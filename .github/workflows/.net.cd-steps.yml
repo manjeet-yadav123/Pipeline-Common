@@ -1,20 +1,16 @@
 on:
-  workflow_call:
+  push:
+    branches: [ "main" ]
+  # Add more triggers as needed
+
 jobs:
-  deploy:
+  deploy_to_qa:
+    name: Deploy to Dev
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build] 
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
           name: app
           path: app
-
-      # - name: Deploy to Azure
-      #   uses: azure/webapps-deploy@v2
-      #   with:
-      #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
-      #     publish-profile: ${{ secrets.APP_SERVICE_SECRET }}
-      #     package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
-
