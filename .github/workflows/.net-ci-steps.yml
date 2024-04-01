@@ -6,6 +6,8 @@ on:
       solution_path:
         description: "Path to the .sln file"
         required: true
+    paths:
+      - '**/*.sln'
       configuration:
         description: "Build configuration (e.g., Debug, Release)"
         required: false
