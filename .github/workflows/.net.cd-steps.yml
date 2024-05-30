@@ -1,8 +1,9 @@
+# on:
+#   push:
+#     branches: [ "main" ]
+#   # Add more triggers as needed
 on:
-  push:
-    branches: [ "main" ]
-  # Add more triggers as needed
-
+  workflow_call:
 jobs:
   deploy_to_qa:
     name: Deploy to Dev
