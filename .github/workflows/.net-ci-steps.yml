@@ -14,17 +14,17 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: dotnet-webapp
+      working-directory: AspNetCoreTests
     - name: Build
       run: dotnet build --configuration Release
-      working-directory: dotnet-webapp
+      working-directory: AspNetCoreTests
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-      working-directory: 'dotnet-webapp'
+      working-directory: 'AspNetCoreTests'
       continue-on-error: true
 
     - name: dotnet publish 
-      run: dotnet publish dotnet-webapp/*.csproj -c Release -o website
+      run: dotnet publish AspNetCoreTests/AspNetCoreTests.Web/*.csproj -c Release -o website
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
