@@ -1,0 +1,53 @@
+name: Deploy to Azure Web App
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: 'The environment to deploy to (dev, QA, UAT, PROD)'
+      # azure_credentials:
+      #   required: true
+      #   type: string
+      #   description: 'Azure service principal credentials'
+      APP_SERVICE_SECRET:
+        required: true
+        type: string
+        description: 'Azure service principal credentials'
+      AZURE_WEBAPP_NAME:
+        required: true
+        type: string
+        description: 'The name of the Azure web app'
+      package_directory:
+        required: false
+        type: string
+        description: 'The directory containing the build files'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifacts
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ inputs.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.APP_SERVICE_SECRET }}
+        package: "${{ inputs.package_directory }}"
+    # - name: Login to Azure
+    #   uses: azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.azure_credentials }}
+    # - name: Deploy to Azure Web App
+    #   uses: azure/webapps-deploy@v2
+    #   with:
+    #     app-name: ${{ inputs.app_name }}
+    #     package: ${{ inputs.package_directory }}
