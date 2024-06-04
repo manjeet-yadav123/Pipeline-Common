@@ -1,7 +1,3 @@
-# on:
-#   push:
-#     branches: [ "main" ]
-#   # Add more triggers as needed
 on:
   workflow_call:
 jobs:
