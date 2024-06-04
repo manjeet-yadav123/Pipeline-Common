@@ -7,14 +7,14 @@ on:
         required: true
         type: string
         description: 'The environment to deploy to (dev, QA, UAT, PROD)'
-      # azure_credentials:
-      #   required: true
-      #   type: string
-      #   description: 'Azure service principal credentials'
-      APP_SERVICE_SECRET:
+      azure_credentials:
         required: true
         type: secret
         description: 'Azure service principal credentials'
+      # APP_SERVICE_SECRET:
+      #   required: true
+      #   type: secret
+      #   description: 'Azure service principal credentials'
       AZURE_WEBAPP_NAME:
         required: true
         type: string
@@ -40,7 +40,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ inputs.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.APP_SERVICE_SECRET }}
+        publish-profile: ${{ secrets.azure_credentials }}
         package: "${{ inputs.package_directory }}"
     # - name: Login to Azure
     #   uses: azure/login@v1
