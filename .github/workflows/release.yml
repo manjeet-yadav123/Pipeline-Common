@@ -7,10 +7,6 @@ on:
         required: true
         type: string
         description: 'The environment to deploy to (dev, QA, UAT, PROD)'
-      # azure_credentials:
-      #   required: true
-      #   type: secret
-      #   description: 'Azure service principal credentials'
       APP_SERVICE_SECRET:
         required: false
         type: string
