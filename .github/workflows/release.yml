@@ -12,7 +12,7 @@ on:
       #   type: secret
       #   description: 'Azure service principal credentials'
       APP_SERVICE_SECRET:
-        required: true
+        required: false
         type: string
         description: 'Azure service principal credentials'
       AZURE_WEBAPP_NAME:
