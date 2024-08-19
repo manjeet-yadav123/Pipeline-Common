@@ -2,24 +2,27 @@ name: Deploy to Azure Web App
 
 on:
   workflow_call:
-    secrets:
+    inputs:
       environment:
         required: true
-        # type: string
+        type: string
         description: 'The environment to deploy to (dev, QA, UAT, PROD)'
       APP_SERVICE_SECRET:
         required: false
-        # type: string
+        type: string
         description: 'Azure service principal credentials'
       AZURE_WEBAPP_NAME:
         required: true
-        # type: string
+        type: string
         description: 'The name of the Azure web app'
       package_directory:
         required: false
-        # type: string
+        type: string
         description: 'The directory containing the build files'
-
+    secrets:
+      APP_SERVICE_SECRET:
+        required: false
+        description: 'Azure service principal credentials'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -37,7 +40,7 @@ jobs:
       with:
         app-name: ${{ inputs.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.APP_SERVICE_SECRET  }}
-        package: "${{ secrets.package_directory }}"
+        package: "${{ inputs.package_directory }}"
     # - name: Login to Azure
     #   uses: azure/login@v1
     #   with:
